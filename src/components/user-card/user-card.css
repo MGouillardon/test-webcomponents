@@ -1,0 +1,24 @@
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 300px;
+  font-family: Arial, sans-serif;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.name {
+  margin: 0;
+  color: #333;
+}
+
+.role {
+  color: #666;
+  font-size: 0.9em;
+}
