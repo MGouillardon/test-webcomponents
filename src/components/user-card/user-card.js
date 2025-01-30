@@ -119,30 +119,27 @@ class UserCard extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-    // Bind methods
-    this._handleClick = this._handleClick.bind(this);
-    this._handleSlotChange = this._handleSlotChange.bind(this);
   }
 
   connectedCallback() {
-    this.addEventListener('click', this._handleClick);
+    this.addEventListener('click', this.#handleClick);
 
     const slots = this.shadowRoot.querySelectorAll('slot');
     slots.forEach(slot => {
-      slot.addEventListener('slotchange', this._handleSlotChange);
+      slot.addEventListener('slotchange', this.#handleSlotChange);
     });
 
-    this._updateStatus(this.getAttribute('status'));
+    this.#updateStatus(this.getAttribute('status'));
 
     this.setAttribute('aria-role', 'article');
     this.setAttribute('tabindex', '0');
   }
 
   disconnectedCallback() {
-    this.removeEventListener('click', this._handleClick);
+    this.removeEventListener('click', this.#handleClick);
     const slots = this.shadowRoot.querySelectorAll('slot');
     slots.forEach(slot => {
-      slot.removeEventListener('slotchange', this._handleSlotChange);
+      slot.removeEventListener('slotchange', this.#handleSlotChange);
     });
   }
 
@@ -151,10 +148,10 @@ class UserCard extends HTMLElement {
 
     switch (name) {
       case 'status':
-        this._updateStatus(newValue);
+        this.#updateStatus(newValue);
         break;
       case 'theme':
-        this._updateTheme(newValue);
+        this.#updateTheme(newValue);
         break;
     }
   }
@@ -179,7 +176,7 @@ class UserCard extends HTMLElement {
     });
   }
 
-  _handleClick(event) {
+  #handleClick(event) {
     const nameSlot = this.shadowRoot.querySelector('slot[name="name"]');
     const roleSlot = this.shadowRoot.querySelector('slot[name="role"]');
 
@@ -197,7 +194,7 @@ class UserCard extends HTMLElement {
     }));
   }
 
-  _handleSlotChange(event) {
+  #handleSlotChange(event) {
     const slot = event.target;
     const nodes = slot.assignedNodes();
 
@@ -207,7 +204,7 @@ class UserCard extends HTMLElement {
     }
   }
 
-  _updateStatus(status) {
+  #updateStatus(status) {
     const statusElement = this.shadowRoot.querySelector('.status');
     if (!statusElement) return;
 
@@ -220,7 +217,7 @@ class UserCard extends HTMLElement {
     }
   }
 
-  _updateTheme(theme) {
+  #updateTheme(theme) {
     const card = this.shadowRoot.querySelector('.card');
     if (!card) return;
 
