@@ -35,6 +35,14 @@ users.forEach(user => {
     status: user.status,
     theme: 'light'
   });
+  card.addEventListener('user-selected', (event) => {
+    console.log('Carte sélectionnée:', event.detail);
+  });
+
+  card.addEventListener('user-updated', (event) => {
+    console.log('Informations mises à jour:', event.detail.info);
+  });
+
   app.appendChild(card);
 
 });
