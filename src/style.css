@@ -44,7 +44,14 @@ h1 {
   padding: 2rem;
   text-align: center;
   display: flex;
+  flex-direction: column;
   gap: 2em;
+}
+
+#app section {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .logo {
